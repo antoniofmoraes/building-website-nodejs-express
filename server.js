@@ -3,6 +3,9 @@ const path = require('path');
 const cookieSession = require('cookie-session');
 const createError = require('http-errors');
 
+const bodyParser = require('body-parser');
+
+const { response } = require('express');
 const FeedbackService = require('./services/FeedbackService');
 const SpeakersService = require('./services/SpeakerService');
 
@@ -10,7 +13,6 @@ const feedbackService = new FeedbackService('./data/feedback.json');
 const speakersService = new SpeakersService('./data/speakers.json');
 
 const routes = require('./routes');
-const { response } = require('express');
 
 const app = express();
 
@@ -24,6 +26,8 @@ app.use(
         keys: ['Yfdaeaw812gh61z3', '8e13ew87ef9kjbwcq'],
     })
 );
+
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, './views'));

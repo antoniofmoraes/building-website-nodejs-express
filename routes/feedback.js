@@ -18,7 +18,10 @@ module.exports = (params) => {
         }
     });
 
-    router.post('/', (req, res) => res.send(`Feedback for posted`));
+    router.post('/', (req, res) => {
+        console.log(req.body);
+        return res.send(`Feedback for posted`);
+    });
 
     return router;
 };
